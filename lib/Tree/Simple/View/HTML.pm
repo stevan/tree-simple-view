@@ -4,7 +4,7 @@ package Tree::Simple::View::HTML;
 use strict;
 use warnings;
 
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 use base 'Tree::Simple::View';
 
@@ -13,6 +13,11 @@ use Tree::Simple::View::Exceptions;
 use constant OPEN_TAG  => 1;
 use constant CLOSE_TAG => 2;
 use constant EXPANDED  => 3;
+
+my %tags = (
+    xhtml => { OL => 'ol', UL => 'ul', LI => 'li', STYLE => q{ style='}, CLASS => q{ class='} },
+    html  => { OL => 'OL', UL => 'UL', LI => 'LI', STYLE => q{ STYLE='}, CLASS => q{ CLASS='} },
+);
 
 ## public methods
 
@@ -150,6 +155,18 @@ sub expandAllComplex {
 sub _processConfig {
     my ($self, $config) = @_;
     my %config = %{$config};
+    
+    # Make sure the tag style is always set to something we know &
+    # set tags to be the hashref of tags we want to save extra indirection later
+    if ( !exists $config{ tag_style } ) {
+        $config{ tags } = $tags{ html };
+    }
+    elsif ( !exists( $tags{ $config{ tag_style } }) ) {
+        throw Tree::Simple::View::CompilationFailed "unknown tag_style $config{ tag_style }";
+    }
+    else {
+        $config{ tags } = $tags{ $config{ tag_style } };
+    }
         
     my $list_func = $self->_buildListFunction(%config) 
         || throw Tree::Simple::View::CompilationFailed "list function didn't compile", $@;
@@ -164,8 +181,8 @@ sub _processConfig {
 use constant LIST_FUNCTION_CODE_STRING => q|
     sub {
         my ($tag_type) = @_;
-        return "<${list_type}L${list_css}>" if ($tag_type == OPEN_TAG);
-        return "</${list_type}L>" if ($tag_type == CLOSE_TAG);
+        return '<' . $config{tags}->{$list_type} . ${list_css} . '>' if ($tag_type == OPEN_TAG);
+        return '</' . $config{tags}->{$list_type} .'>' if ($tag_type == CLOSE_TAG);
     }
 |;
 
@@ -174,7 +191,7 @@ use constant LIST_ITEM_FUNCTION_CODE_STRING  => q|;
         my ($t, $is_expanded) = @_;
         my $item_css = $list_item_css;
         $item_css = $expanded_item_css if ($is_expanded && $expanded_item_css);
-        return "<LI${item_css}>" . (($node_formatter) ? $node_formatter->($t) : $t->getNodeValue()) . "</LI>";
+        return '<'.$config{tags}->{LI}.$item_css.'>' . (($node_formatter) ? $node_formatter->($t) : $t->getNodeValue()) . '</'.$config{tags}->{LI}.'>';
     }
 |;
 
@@ -182,8 +199,8 @@ use constant LIST_ITEM_FUNCTION_CODE_STRING  => q|;
 sub _processListConfig {
     my ($self, %config) = @_;
     
-    my $list_type = "U";
-    $list_type = (($config{list_type} eq "unordered") ? "U" : "O") if exists $config{list_type};
+    my $list_type = "UL";
+    $list_type = (($config{list_type} eq "unordered") ? "UL" : "OL") if exists $config{list_type};
 
     my $list_css = "";
     if (exists $config{list_css}) {
@@ -194,10 +211,10 @@ sub _processListConfig {
         # but if it did, this same idiom could be reused
         my $_list_css = $config{list_css};
         $_list_css .= ";" unless ($_list_css =~ /\;$/);        
-        $list_css = " STYLE='${_list_css}'";
+        $list_css = $config{tags}->{STYLE} . "${_list_css}'";
     }
     elsif (exists $config{list_css_class}) {
-        $list_css = " CLASS='" . $config{list_css_class} . "'";
+        $list_css = $config{tags}->{CLASS} . $config{list_css_class} . "'";
     }
     # otherwise do nothing and stick with default
     
@@ -219,19 +236,19 @@ sub _processListItemConfig {
     
     my $list_item_css = "";
     if (exists $config{list_item_css}) {
-        $list_item_css = " STYLE='" . $config{list_item_css} . "'";
+        $list_item_css = $config{tags}->{STYLE} . $config{list_item_css} . "'";
     }
     elsif (exists $config{list_item_css_class}) {
-        $list_item_css = " CLASS='" . $config{list_item_css_class} . "'";
+        $list_item_css = $config{tags}->{CLASS} . $config{list_item_css_class} . "'";
     }
     # otherwise do nothing and stick with default    
 
     my $expanded_item_css = "";
     if (exists $config{expanded_item_css}) {
-        $expanded_item_css = " STYLE='" . $config{expanded_item_css} . "'";
+        $expanded_item_css = $config{tags}->{STYLE} . $config{expanded_item_css} . "'";
     }
     elsif (exists $config{expanded_item_css_class}) {
-        $expanded_item_css = " CLASS='" . $config{expanded_item_css_class} . "'";
+        $expanded_item_css = $config{tags}->{CLASS} . $config{expanded_item_css_class} . "'";
     }
     # otherwise do nothing and stick with default    
     
@@ -316,6 +333,10 @@ This class outputs fairly vanilla HTML in its simpliest configuration, suitable 
 Accepts a C<$tree> argument of a Tree::Simple object (or one derived from Tree::Simple), if C<$tree> is not a Tree::Simple object, and exception is thrown. This C<$tree> object does not need to be a ROOT, you can start at any level of the tree you desire. The options in the C<%config> argument are as follows:
 
 =over 4
+
+=item I<tag_style>
+
+This can be either 'html' or 'xhtml', which will produce output with tags in capitals or lowercase respectively, for xhtml compliance. The default is 'html' for backwards compatibility.
 
 =item I<list_type>
 
@@ -488,7 +509,7 @@ stevan little, E<lt>stevan@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004 by Infinity Interactive, Inc.
+Copyright 2004, 2005 by Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 

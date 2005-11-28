@@ -4,7 +4,7 @@ package Tree::Simple::View::DHTML;
 use strict;
 use warnings;
 
-our $VERSION = '0.12';
+our $VERSION = '0.13';
 
 use base 'Tree::Simple::View::HTML';
 
@@ -165,7 +165,7 @@ use constant LIST_FUNCTION_CODE_STRING => q|
     sub {
         my ($tag_type, $list_id, $display_style) = @_;
         # allow this to be found quickly
-        return "</${list_type}L>" if ($tag_type == CLOSE_TAG);        
+        return "</${list_type}>" if ($tag_type == CLOSE_TAG);        
         # test the most functional first
         if ($tag_type == OPEN_TAG && $list_id && $display_style) {
             my $temp_list_css;
@@ -183,13 +183,13 @@ use constant LIST_FUNCTION_CODE_STRING => q|
             else {
                 $temp_list_css = " STYLE='display: $display_style;'"
             }
-            return "<${list_type}L${temp_list_css} ID='${list_id}'>" 
+            return "<${list_type}${temp_list_css} ID='${list_id}'>" 
         }
         # next...
-        return "<${list_type}L${list_css} ID='${list_id}'>" 
+        return "<${list_type}${list_css} ID='${list_id}'>" 
             if ($tag_type == OPEN_TAG && $list_id);         
         # and finally, something that does nothing really
-        return "<${list_type}L${list_css}>" if ($tag_type == OPEN_TAG);
+        return "<${list_type}${list_css}>" if ($tag_type == OPEN_TAG);
     }
 |;
 
@@ -605,7 +605,7 @@ stevan little, E<lt>stevan@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004 by Infinity Interactive, Inc.
+Copyright 2004, 2005 by Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 

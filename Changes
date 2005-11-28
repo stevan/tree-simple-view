@@ -1,5 +1,11 @@
 Revision history for Perl extension Tree-Simple-View.
 
+0.14 Mon Novermber 28, 2005
+    - removing the OS X resource fork files
+    - applied patch (RT #16064) to support XHTML 
+      compliant output for Tree::Simple::View::HTML.
+        - thanks to Simon Wilcox for this patch and tests
+
 0.13 Mon. November 7, 2005
     - fixing typo on the generated HTML (rt.cpan.org Ticket #14963)
     - cleaned up View.pm as little as well

@@ -2,13 +2,14 @@ Changes
 Makefile.PL
 MANIFEST
 README
+examples/DHTML_example.html
 lib/Tree/Simple/View.pm
+lib/Tree/Simple/View/DHTML.pm
 lib/Tree/Simple/View/Exceptions.pm
 lib/Tree/Simple/View/HTML.pm
-lib/Tree/Simple/View/DHTML.pm
 t/10_Tree_Simple_View_test.t
 t/20_Tree_Simple_View_HTML_test.t
+t/22_Tree_Simple_View_HTML_tag_style.t
 t/30_Tree_Simple_View_DHTML_test.t
 t/pod.t
 t/pod_coverage.t
-examples/DHTML_example.html

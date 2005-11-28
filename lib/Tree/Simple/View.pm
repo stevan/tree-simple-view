@@ -4,7 +4,7 @@ package Tree::Simple::View;
 use strict;
 use warnings;
 
-our $VERSION = '0.13';
+our $VERSION = '0.14';
 
 use Scalar::Util qw(blessed);
 
@@ -319,6 +319,8 @@ This module is similar to the HTML::PopupTreeSelect, in that it is intended for 
 
 =item Thanks to Neyuki for the idea of the C<setPathComparisonFunction> method.
 
+=item Thanks to Simon Wilcox for the patch and test for XHTML support for Tree::Simple::View::HTML.
+
 =back
 
 =head1 AUTHOR
@@ -327,7 +329,7 @@ stevan little, E<lt>stevan@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004 by Infinity Interactive, Inc.
+Copyright 2004, 2005 by Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 
