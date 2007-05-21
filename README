@@ -1,4 +1,4 @@
-Tree::Simple::View version 0.14
+Tree::Simple::View version 0.15
 ===========================
 
 See the individual module documentation for more information
@@ -20,7 +20,7 @@ This module requires these other modules and libraries:
 
 COPYRIGHT AND LICENCE
 
-Copyright (C) 2004, 2005 Infinity Interactive, Inc.
+Copyright (C) 2004-2007 Infinity Interactive, Inc.
 
 http://www.iinteractive.com
 

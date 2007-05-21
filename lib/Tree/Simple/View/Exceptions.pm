@@ -11,11 +11,13 @@ use Class::Throwable qw(
     Tree::Simple::View::AbstractMethod
     Tree::Simple::View::AbstractClass
     Tree::Simple::View::CompilationFailed
-    );
+);
     
 1;
 
 __END__
+
+=pod
 
 =head1 NAME
 
@@ -27,7 +29,8 @@ Tree::Simple::View::Exceptions - A set of exceptions for Tree::Simple::View
 
 =head1 DESCRIPTION
 
-This just creates and loads a few exceptions for use by the Tree::Simple::View classes. Nothing else to see really.
+This just creates and loads a few exceptions for use by the Tree::Simple::View classes. 
+Nothing else to see really.
 
 =head1 EXCEPTIONS
 
@@ -65,7 +68,7 @@ stevan little, E<lt>stevan@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004, 2005 by Infinity Interactive, Inc.
+Copyright 2004-2007 by Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 

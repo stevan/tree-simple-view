@@ -1,5 +1,9 @@
 Revision history for Perl extension Tree-Simple-View.
 
+0.15
+    * added a simple Tree::Simple::View::ASCII
+        - added docs and tests for it
+
 0.14 Mon Novermber 28, 2005
     - removing the OS X resource fork files
     - applied patch (RT #16064) to support XHTML 

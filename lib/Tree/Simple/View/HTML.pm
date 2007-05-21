@@ -271,6 +271,8 @@ sub _buildListItemFunction {
 
 __END__
 
+=pod
+
 =head1 NAME
 
 Tree::Simple::View::HTML - A class for viewing Tree::Simple hierarchies in HTML
@@ -320,9 +322,14 @@ Tree::Simple::View::HTML - A class for viewing Tree::Simple hierarchies in HTML
 
 =head1 DESCRIPTION
 
-This is a class for use with Tree::Simple object hierarchies to serve as a means of displaying them in HTML. It is the "View", while the Tree::Simple object hierarchy would be the "Model" in your standard Model-View-Controller paradigm. 
+This is a class for use with Tree::Simple object hierarchies to serve as a means of 
+displaying them in HTML. It is the "View", while the Tree::Simple object hierarchy 
+would be the "Model" in your standard Model-View-Controller paradigm. 
 
-This class outputs fairly vanilla HTML in its simpliest configuration, suitable for both legacy browsers and text-based browsers. Through the use of various configuration options, CSS can be applied to support more advanced browsers but still degrade gracefully to legacy browsers. 
+This class outputs fairly vanilla HTML in its simpliest configuration, suitable for 
+both legacy browsers and text-based browsers. Through the use of various configuration 
+options, CSS can be applied to support more advanced browsers but still degrade 
+gracefully to legacy browsers. 
 
 =head1 METHODS
 
@@ -330,45 +337,67 @@ This class outputs fairly vanilla HTML in its simpliest configuration, suitable 
 
 =item B<new ($tree, %configuration)>
 
-Accepts a C<$tree> argument of a Tree::Simple object (or one derived from Tree::Simple), if C<$tree> is not a Tree::Simple object, and exception is thrown. This C<$tree> object does not need to be a ROOT, you can start at any level of the tree you desire. The options in the C<%config> argument are as follows:
+Accepts a C<$tree> argument of a Tree::Simple object (or one derived from Tree::Simple), 
+if C<$tree> is not a Tree::Simple object, and exception is thrown. This C<$tree> object 
+does not need to be a ROOT, you can start at any level of the tree you desire. The 
+options in the C<%config> argument are as follows:
 
 =over 4
 
 =item I<tag_style>
 
-This can be either 'html' or 'xhtml', which will produce output with tags in capitals or lowercase respectively, for xhtml compliance. The default is 'html' for backwards compatibility.
+This can be either 'html' or 'xhtml', which will produce output with tags in capitals 
+or lowercase respectively, for xhtml compliance. The default is 'html' for backwards 
+compatibility.
 
 =item I<list_type>
 
-This can be either 'ordered' or 'unordered', which will produce ordered and unordered lists respectively. The default is 'unordered'.
+This can be either 'ordered' or 'unordered', which will produce ordered and unordered 
+lists respectively. The default is 'unordered'.
 
 =item I<list_css>
 
-This can be a string of CSS to be applied to the list tag (C<UL> or C<OL> depending upon the I<list_type> option). This option and the I<list_css_class> are mutually exclusive, and this option will override in a conflict.
+This can be a string of CSS to be applied to the list tag (C<UL> or C<OL> depending 
+upon the I<list_type> option). This option and the I<list_css_class> are mutually 
+exclusive, and this option will override in a conflict.
 
 =item I<list_css_class>
 
-This can be a CSS class name which is applied to the list tag (C<UL> or C<OL> depending upon the I<list_type> option). This option and the I<list_css> are mutually exclusive, and the I<list_css> option will override in a conflict.
+This can be a CSS class name which is applied to the list tag (C<UL> or C<OL> depending 
+upon the I<list_type> option). This option and the I<list_css> are mutually exclusive, 
+and the I<list_css> option will override in a conflict.
 
 =item I<list_item_css>
 
-This can be a string of CSS to be applied to the list item tag (C<LI>). This option and the I<list_item_css_class> are mutually exclusive, and this option will override in a conflict.
+This can be a string of CSS to be applied to the list item tag (C<LI>). This option 
+and the I<list_item_css_class> are mutually exclusive, and this option will override 
+in a conflict.
 
 =item I<list_item_css_class>
 
-This can be a CSS class name which is applied to the list item tag (C<LI>). This option and the I<list_item_css> are mutually exclusive, and the I<list_item_css> option will override in a conflict.
+This can be a CSS class name which is applied to the list item tag (C<LI>). This option 
+and the I<list_item_css> are mutually exclusive, and the I<list_item_css> option will 
+override in a conflict.
 
 =item I<expanded_item_css>
 
-This can be a string of CSS to be applied to the list item tag (C<LI>) if it has an expanded set of children. This option and the I<expanded_item_css_class> are mutually exclusive, and this option will override in a conflict.
+This can be a string of CSS to be applied to the list item tag (C<LI>) if it has an 
+expanded set of children. This option and the I<expanded_item_css_class> are mutually 
+exclusive, and this option will override in a conflict.
 
 =item I<expanded_item_css_class>
 
-This can be a CSS class name which is applied to the list item tag (C<LI>) if it has an expanded set of children. This option and the I<expanded_item_css> are mutually exclusive, and the I<expanded_item_css> option will override in a conflict.
+This can be a CSS class name which is applied to the list item tag (C<LI>) if it has 
+an expanded set of children. This option and the I<expanded_item_css> are mutually 
+exclusive, and the I<expanded_item_css> option will override in a conflict.
 
 =item I<node_formatter>
 
-This can be a CODE reference which will be given the current tree object as its only argument. The output of this subroutine will be placed within the list item tags (C<LI>). This option can be used to implement; custom formatting of the node, handling of complex node objects or implementing any type of handler code to drive your interface (using link tags or form submissions, etc). 
+This can be a CODE reference which will be given the current tree object as its only 
+argument. The output of this subroutine will be placed within the list item tags 
+(C<LI>). This option can be used to implement; custom formatting of the node, handling 
+of complex node objects or implementing any type of handler code to drive your 
+interface (using link tags or form submissions, etc). 
 
 =back
 
@@ -382,15 +411,25 @@ A basic accessor to reach the underlying configuration hash.
 
 =item B<includeTrunk ($boolean)>
 
-This controls the getting and setting (through the optional C<$boolean> argument) of the option to include the tree's trunk in the output. Many times, the trunk is not actually part of the tree, but simply a root from which all the branches spring. However, on occasion, it might be nessecary to view a sub-tree, in which case, the trunk is likely intended to be part of the output. This option defaults to off. 
+This controls the getting and setting (through the optional C<$boolean> argument) of 
+the option to include the tree's trunk in the output. Many times, the trunk is not 
+actually part of the tree, but simply a root from which all the branches spring. 
+However, on occasion, it might be nessecary to view a sub-tree, in which case, the 
+trunk is likely intended to be part of the output. This option defaults to off. 
 
 =item B<setPathComparisonFunction ($CODE)>
 
-This takes a C<$CODE> reference, which can be used to add custom path comparison features to Tree::Simple::View. The function will get two arguments, the first is the C<$current_path>, the second is the C<$current_tree>. When using C<expandPath>, it may sometimes be nessecary to be able to control the comparison of the path values. For instance, your node may be an object and need a specific method called to match the path against. 
+This takes a C<$CODE> reference, which can be used to add custom path comparison 
+features to Tree::Simple::View. The function will get two arguments, the first is 
+the C<$current_path>, the second is the C<$current_tree>. When using C<expandPath>, 
+it may sometimes be nessecary to be able to control the comparison of the path values. 
+For instance, your node may be an object and need a specific method called to match 
+the path against. 
 
 =item B<expandPath (@path)>
 
-This method will return a string of HTML which will represent your tree expanded along the given C<@path>. This is best shown visually. Given this tree:
+This method will return a string of HTML which will represent your tree expanded 
+along the given C<@path>. This is best shown visually. Given this tree:
 
   Tree-Simple-View
       lib
@@ -427,39 +466,61 @@ Your display would like something like this:
       Changes
       t
 
-As you can see, the given path has been expanded, but no other sub-trees are shown (nor is the HTML of the un-expanded nodes to be found in the output). 
+As you can see, the given path has been expanded, but no other sub-trees are 
+shown (nor is the HTML of the un-expanded nodes to be found in the output). 
 
-It should be noted that this method actually calls either the C<expandPathSimple> or C<expandPathComplex> method depending upon the C<%config> argument in the constructor. See their documenation for details.
+It should be noted that this method actually calls either the C<expandPathSimple> 
+or C<expandPathComplex> method depending upon the C<%config> argument in the 
+constructor. See their documenation for details.
 
 =item B<expandPathSimple ($tree, @path)>
 
-If no C<%config> argument is given in the constructor, then this method is called by C<expandPath>. This method is optimized since it does not need to process any configuration, but just as the name implies, it's output is simple.
+If no C<%config> argument is given in the constructor, then this method is called 
+by C<expandPath>. This method is optimized since it does not need to process any 
+configuration, but just as the name implies, it's output is simple.
 
-This method can also be used for another purpose, which is to bypass a previously specified configuration and use the base "simple" configuration instead.
+This method can also be used for another purpose, which is to bypass a previously 
+specified configuration and use the base "simple" configuration instead.
 
 =item B<expandPathComplex ($tree, $config, @path)>
 
-If a C<%config> argument is given in the constructor, then this method is called by C<expandPath>. This method has been optimized to be used with configurations, and will actually custom compile code (using C<eval>) to speed up the generation of the output.
+If a C<%config> argument is given in the constructor, then this method is called 
+by C<expandPath>. This method has been optimized to be used with configurations, 
+and will actually custom compile code (using C<eval>) to speed up the generation 
+of the output.
 
-This method can also be used for another purpose, which is to bypass a previously specified configuration and use the configuration specified (as a HASH reference) in the C<$config> parameter.
+This method can also be used for another purpose, which is to bypass a previously 
+specified configuration and use the configuration specified (as a HASH reference) 
+in the C<$config> parameter.
 
 =item B<expandAll>
 
-This method will return a string of HTML which will represent your tree completely expanded.
+This method will return a string of HTML which will represent your tree completely 
+expanded.
 
-It should be noted that this method actually calls either the C<expandAllSimple> or C<expandAllComplex> method depending upon the C<%config> argument in the constructor.   
+It should be noted that this method actually calls either the C<expandAllSimple> 
+or C<expandAllComplex> method depending upon the C<%config> argument in the 
+constructor.   
 
 =item B<expandAllSimple>
 
-If no C<%config> argument is given in the constructor, then this method is called by C<expandAll>. This method too is optimized since it does not need to process any configuration.
+If no C<%config> argument is given in the constructor, then this method is called 
+by C<expandAll>. This method too is optimized since it does not need to process 
+any configuration.
 
-This method as well can also be used to bypass a previously specified configuration and use the base "simple" configuration instead.
+This method as well can also be used to bypass a previously specified configuration 
+and use the base "simple" configuration instead.
 
 =item B<expandAllComplex ($config)>
 
-If a C<%config> argument is given in the constructor, then this method is called by C<expandAll>. This method too has been optimized to be used with configurations, and will also custom compile code (using C<eval>) to speed up the generation of the output.
+If a C<%config> argument is given in the constructor, then this method is called 
+by C<expandAll>. This method too has been optimized to be used with configurations, 
+and will also custom compile code (using C<eval>) to speed up the generation of 
+the output.
 
-Just as with C<expandPathComplex>, this method can be to bypass a previously specified configuration and use the configuration specified (as a HASH reference) in the C<$config> parameter.
+Just as with C<expandPathComplex>, this method can be to bypass a previously 
+specified configuration and use the configuration specified (as a HASH reference) 
+in the C<$config> parameter.
 
 =back
 
@@ -469,7 +530,8 @@ Just as with C<expandPathComplex>, this method can be to bypass a previously spe
 
 =item B<depth-based css>
 
-I would like to be able to set any of my css properties as an array, which would essentially allow for depth-based css values. For instance, something like this:
+I would like to be able to set any of my css properties as an array, which would 
+essentially allow for depth-based css values. For instance, something like this:
 
   list_css => [
       "font-size: 14pt;",
@@ -477,15 +539,23 @@ I would like to be able to set any of my css properties as an array, which would
       "font-size: 10pt;"      
       ];
 
-This would result in the first level of the tree having a font-size of 14 points, the second level would have a font-size of 12 points, then all other levels past the second level (third and beyond) would have a font-size of 10 points. Of course if a fourth element were added to this array (ex: "font-size: 8pt;"), then the third level would have a font-size of 10 points, and all others past that level would have the font-size of 8 points. 
+This would result in the first level of the tree having a font-size of 14 points, 
+the second level would have a font-size of 12 points, then all other levels past 
+the second level (third and beyond) would have a font-size of 10 points. Of course 
+if a fourth element were added to this array (ex: "font-size: 8pt;"), then the third 
+level would have a font-size of 10 points, and all others past that level would 
+have the font-size of 8 points. 
 
-Ideally this option would be available for all I<*_css> and I<*_css_class> options. I have not yet figured out the best way to do this though, so ideas/suggestions are welcome, of course, patches are even better.
+Ideally this option would be available for all I<*_css> and I<*_css_class> options. 
+I have not yet figured out the best way to do this though, so ideas/suggestions are 
+welcome, of course, patches are even better.
 
 =back
 
 =head1 BUGS
 
-None that I am aware of. Of course, if you find a bug, let me know, and I will be sure to fix it. 
+None that I am aware of. Of course, if you find a bug, let me know, and I will be 
+sure to fix it. 
 
 =head1 CODE COVERAGE
 
@@ -509,7 +579,7 @@ stevan little, E<lt>stevan@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004, 2005 by Infinity Interactive, Inc.
+Copyright 2004-2007 by Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 
