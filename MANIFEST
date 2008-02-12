@@ -15,5 +15,6 @@ t/20_Tree_Simple_View_HTML_test.t
 t/22_Tree_Simple_View_HTML_tag_style.t
 t/30_Tree_Simple_View_DHTML_test.t
 t/40_Tree_Simple_View_ASCII_test.t
+t/41_Tree_Simple_View_ASCII_w_formatter.t
 t/pod.t
 t/pod_coverage.t

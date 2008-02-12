@@ -4,7 +4,7 @@ package Tree::Simple::View::ASCII;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use base 'Tree::Simple::View';
 
@@ -60,7 +60,12 @@ sub expandAllSimple  {
     return $output;
 }
 
-*expandPathComplex = \&expandPathSimple;
+sub expandPathComplex { 
+    my ($self, $tree, undef, @full_path) = @_;
+    # complex stuff is not supported here ...
+    $self->expandPathSimple($tree, @full_path);
+}
+
 *expandAllComplex  = \&expandAllSimple;
 
 sub _processNode {
@@ -86,9 +91,13 @@ sub _processNode {
         $vert_dashes->[$depth] = "        ";
     }
 
+    my $node = exists $self->{config}->{node_formatter} 
+        ? $self->{config}->{node_formatter}->($t)
+        : $t->getNodeValue;
+
     return ((join "" => @indent[1 .. $#indent]) 
             . ($depth ? "    |---" : "") 
-            . $t->getNodeValue 
+            . $node 
             . "\n");    
 }
 
@@ -187,7 +196,7 @@ stevan little, E<lt>stevan@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004-2007 by Infinity Interactive, Inc.
+Copyright 2004-2008 by Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 

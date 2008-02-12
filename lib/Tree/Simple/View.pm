@@ -4,7 +4,7 @@ package Tree::Simple::View;
 use strict;
 use warnings;
 
-our $VERSION = '0.16';
+our $VERSION = '0.17';
 
 use Scalar::Util qw(blessed);
 
@@ -351,7 +351,7 @@ stevan little, E<lt>stevan@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004-2007 by Infinity Interactive, Inc.
+Copyright 2004-2008 by Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 
