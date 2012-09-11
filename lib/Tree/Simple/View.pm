@@ -1,4 +1,3 @@
-
 package Tree::Simple::View;
 
 use strict;
@@ -305,12 +304,12 @@ This module is an alternative to Data::Dumper for dumping out any type of data s
 As the author points out, the output of Data::Dumper when dealing with tree structures can 
 be difficult to read at best. This module solves that problem by dumping a much more readable 
 and understandable output specially for tree structures. Data::TreeDumper has many options 
-for output, including custom filtersand coloring. I have been working with this modules author  
+for output, including custom filters and coloring. I have been working with this module’s author  
 and we have been sharing code. Data::TreeDumper can output Tree::Simple objects 
 (L<http://search.cpan.org/~nkh/Data-TreeDumper-0.15/TreeDumper.pm#Structure_replacement>). 
-This givesTree::Simple the ability to utilize the ASCII/ANSI output  styles of Data::TreeDumper. 
+This gives Tree::Simple the ability to utilize the ASCII/ANSI output  styles of Data::TreeDumper. 
 Nadim has used some of the code from  Tree::Simple::View to add DHTML output to Data::TreeDumper. 
-The DHTML output can be without tree-lines as for Tree::Simple:View or with tree-lines as with 
+The DHTML output can be without tree-lines as for Tree::Simple::View or with tree-lines as with 
 Data::TreeDumper.
 
 =item B<HTML::PopupTreeSelect>
